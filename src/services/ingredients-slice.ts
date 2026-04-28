@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
-import { getIngredientsApi } from '../utils/burger-api';
-import { TIngredient } from '../utils/types';
+import { getIngredientsApi } from '@api';
+import { TIngredient } from '@utils-types';
 import { RootState } from './store';
 
 export const fetchIngredients = createAsyncThunk<
@@ -57,17 +57,18 @@ export const ingredientsSlice = createSlice({
 export const { getIngredients, getIsLoading, getError } =
   ingredientsSlice.selectors;
 
-const selectIngredients = (state: RootState) => state.ingredients.ingredients;
+const selectAllIngredients = (state: RootState) =>
+  state.ingredients.ingredients;
 
-export const getBuns = createSelector(selectIngredients, (items) =>
+export const getBuns = createSelector(selectAllIngredients, (items) =>
   items.filter((i) => i.type === 'bun')
 );
 
-export const getSauces = createSelector(selectIngredients, (items) =>
+export const getSauces = createSelector(selectAllIngredients, (items) =>
   items.filter((i) => i.type === 'sauce')
 );
 
-export const getMains = createSelector(selectIngredients, (items) =>
+export const getMains = createSelector(selectAllIngredients, (items) =>
   items.filter((i) => i.type === 'main')
 );
 

@@ -4,13 +4,13 @@ import { IngredientDetailsUI } from '../ui/ingredient-details';
 import { useParams } from 'react-router-dom';
 import { useSelector } from '../../services/store';
 import { getIngredients, getIsLoading } from '../../services/ingredients-slice';
-import { getError } from '../../services/order-slice';
+import { getOrderError } from '../../services/order-slice';
 
 export const IngredientDetails: FC = () => {
   const { id } = useParams<{ id: string }>();
   const ingredients = useSelector(getIngredients);
   const isLoading = useSelector(getIsLoading);
-  const error = useSelector(getError);
+  const error = useSelector(getOrderError);
 
   const ingredientData = useMemo(
     () => ingredients.find((ingredient) => ingredient._id === id) ?? null,

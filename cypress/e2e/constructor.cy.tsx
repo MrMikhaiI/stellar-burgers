@@ -75,7 +75,7 @@ describe('Конструктор бургера', () => {
       cy.clearCookie('accessToken');
     });
 
-    it('должен оформлять заказ и показывать номер заказа', () => {
+    it('должен оформлять заказ, показывать номер и очищать конструктор', () => {
       cy.contains('Краторная булка N-200i')
         .closest('li')
         .find('button')
@@ -85,6 +85,15 @@ describe('Конструктор бургера', () => {
         .find('button')
         .click();
 
+      cy.get('[data-cy="constructor-bun-top"]').should(
+        'contain',
+        'Краторная булка N-200i'
+      );
+      cy.get('[data-cy="constructor-ingredients"]').should(
+        'contain',
+        'Биокотлета из марсианской Магнолии'
+      );
+
       cy.contains('button', 'Оформить заказ').click();
       cy.wait('@createOrder');
 
@@ -93,6 +102,15 @@ describe('Конструктор бургера', () => {
 
       cy.get('[data-cy="modal-close"]').click();
       cy.get('[data-cy="modal"]').should('not.exist');
+
+      cy.get('[data-cy="constructor-bun-top"]').should(
+        'not.contain',
+        'Краторная булка N-200i'
+      );
+      cy.get('[data-cy="constructor-ingredients"]').should(
+        'not.contain',
+        'Биокотлета из марсианской Магнолии'
+      );
     });
   });
 });

@@ -16,7 +16,8 @@ export default {
     '^@slices(.*)$': '<rootDir>/src/services/slices$1',
     '^@selectors(.*)$': '<rootDir>/src/services/selectors$1'
   },
-  setupFilesAfterFramework: ['<rootDir>/src/setupTests.ts'],
+  setupFilesAfterFramework: undefined,
+  setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   collectCoverage: false,
   coverageDirectory: 'coverage',
   coverageProvider: 'v8'

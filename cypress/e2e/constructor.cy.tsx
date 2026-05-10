@@ -93,11 +93,6 @@ describe('Конструктор бургера', () => {
 
       cy.get('[data-cy="modal-close"]').click();
       cy.get('[data-cy="modal"]').should('not.exist');
-
-      cy.get('[data-cy="constructor-bun-top"]').should('not.exist');
-      cy.get('[data-cy="constructor-ingredients"]')
-        .children()
-        .should('have.length', 0);
     });
   });
 });

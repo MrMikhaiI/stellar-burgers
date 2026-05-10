@@ -2,10 +2,7 @@ import { Preloader } from '@ui';
 import { FeedUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
 import { useDispatch, useSelector } from '../../services/store';
-import {
-  getOrderHistory,
-  getOrders
-} from '../../services/order-history-slice';
+import { getOrderHistory, getOrders } from '../../services/order-history-slice';
 
 export const Feed: FC = () => {
   const dispatch = useDispatch();

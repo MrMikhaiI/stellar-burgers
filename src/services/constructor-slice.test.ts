@@ -14,9 +14,12 @@ const mockBun: TIngredient = {
   carbohydrates: 53,
   calories: 420,
   price: 1255,
-  image: 'https://code.s3.yandex.net/react-developer-burger-ui-components/bun.png',
-  image_mobile: 'https://code.s3.yandex.net/react-developer-burger-ui-components/bun-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react-developer-burger-ui-components/bun-large.png'
+  image:
+    'https://code.s3.yandex.net/react-developer-burger-ui-components/bun.png',
+  image_mobile:
+    'https://code.s3.yandex.net/react-developer-burger-ui-components/bun-mobile.png',
+  image_large:
+    'https://code.s3.yandex.net/react-developer-burger-ui-components/bun-large.png'
 };
 
 const mockIngredient: TIngredient = {
@@ -28,9 +31,12 @@ const mockIngredient: TIngredient = {
   carbohydrates: 33,
   calories: 420,
   price: 1337,
-  image: 'https://code.s3.yandex.net/react-developer-burger-ui-components/main.png',
-  image_mobile: 'https://code.s3.yandex.net/react-developer-burger-ui-components/main-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react-developer-burger-ui-components/main-large.png'
+  image:
+    'https://code.s3.yandex.net/react-developer-burger-ui-components/main.png',
+  image_mobile:
+    'https://code.s3.yandex.net/react-developer-burger-ui-components/main-mobile.png',
+  image_large:
+    'https://code.s3.yandex.net/react-developer-burger-ui-components/main-large.png'
 };
 
 const mockIngredient2: TIngredient = {
@@ -42,9 +48,12 @@ const mockIngredient2: TIngredient = {
   carbohydrates: 40,
   calories: 30,
   price: 90,
-  image: 'https://code.s3.yandex.net/react-developer-burger-ui-components/sauce.png',
-  image_mobile: 'https://code.s3.yandex.net/react-developer-burger-ui-components/sauce-mobile.png',
-  image_large: 'https://code.s3.yandex.net/react-developer-burger-ui-components/sauce-large.png'
+  image:
+    'https://code.s3.yandex.net/react-developer-burger-ui-components/sauce.png',
+  image_mobile:
+    'https://code.s3.yandex.net/react-developer-burger-ui-components/sauce-mobile.png',
+  image_large:
+    'https://code.s3.yandex.net/react-developer-burger-ui-components/sauce-large.png'
 };
 
 describe('constructorSlice', () => {
@@ -69,7 +78,10 @@ describe('constructorSlice', () => {
     });
 
     it('должен добавлять несколько начинок в конструктор', () => {
-      let state = constructorReducer(initialState, addIngredient(mockIngredient));
+      let state = constructorReducer(
+        initialState,
+        addIngredient(mockIngredient)
+      );
       state = constructorReducer(state, addIngredient(mockIngredient2));
       expect(state.ingredients).toHaveLength(2);
     });
@@ -77,14 +89,20 @@ describe('constructorSlice', () => {
 
   describe('removeIngredient', () => {
     it('должен удалять ингредиент по id', () => {
-      let state = constructorReducer(initialState, addIngredient(mockIngredient));
+      let state = constructorReducer(
+        initialState,
+        addIngredient(mockIngredient)
+      );
       const addedId = state.ingredients[0].id;
       state = constructorReducer(state, removeIngredient(addedId));
       expect(state.ingredients).toHaveLength(0);
     });
 
     it('не должен удалять другие ингредиенты при удалении одного', () => {
-      let state = constructorReducer(initialState, addIngredient(mockIngredient));
+      let state = constructorReducer(
+        initialState,
+        addIngredient(mockIngredient)
+      );
       state = constructorReducer(state, addIngredient(mockIngredient2));
       const firstId = state.ingredients[0].id;
       state = constructorReducer(state, removeIngredient(firstId));
@@ -95,7 +113,10 @@ describe('constructorSlice', () => {
 
   describe('moveIngredient', () => {
     it('должен перемещать ингредиент вверх', () => {
-      let state = constructorReducer(initialState, addIngredient(mockIngredient));
+      let state = constructorReducer(
+        initialState,
+        addIngredient(mockIngredient)
+      );
       state = constructorReducer(state, addIngredient(mockIngredient2));
       const secondId = state.ingredients[1].id;
       state = constructorReducer(
@@ -106,7 +127,10 @@ describe('constructorSlice', () => {
     });
 
     it('должен перемещать ингредиент вниз', () => {
-      let state = constructorReducer(initialState, addIngredient(mockIngredient));
+      let state = constructorReducer(
+        initialState,
+        addIngredient(mockIngredient)
+      );
       state = constructorReducer(state, addIngredient(mockIngredient2));
       const firstId = state.ingredients[0].id;
       state = constructorReducer(
@@ -117,7 +141,10 @@ describe('constructorSlice', () => {
     });
 
     it('не должен перемещать первый ингредиент вверх', () => {
-      let state = constructorReducer(initialState, addIngredient(mockIngredient));
+      let state = constructorReducer(
+        initialState,
+        addIngredient(mockIngredient)
+      );
       state = constructorReducer(state, addIngredient(mockIngredient2));
       const originalOrder = state.ingredients.map((i) => i.id);
       state = constructorReducer(

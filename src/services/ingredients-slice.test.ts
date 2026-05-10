@@ -11,9 +11,12 @@ const mockIngredients: TIngredient[] = [
     carbohydrates: 53,
     calories: 420,
     price: 1255,
-    image: 'https://code.s3.yandex.net/react-developer-burger-ui-components/bun.png',
-    image_mobile: 'https://code.s3.yandex.net/react-developer-burger-ui-components/bun-mobile.png',
-    image_large: 'https://code.s3.yandex.net/react-developer-burger-ui-components/bun-large.png'
+    image:
+      'https://code.s3.yandex.net/react-developer-burger-ui-components/bun.png',
+    image_mobile:
+      'https://code.s3.yandex.net/react-developer-burger-ui-components/bun-mobile.png',
+    image_large:
+      'https://code.s3.yandex.net/react-developer-burger-ui-components/bun-large.png'
   }
 ];
 

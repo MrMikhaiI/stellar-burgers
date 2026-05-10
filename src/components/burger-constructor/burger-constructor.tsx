@@ -2,8 +2,15 @@ import { FC, useMemo } from 'react';
 import { TConstructorIngredient } from '@utils-types';
 import { BurgerConstructorUI } from '@ui';
 import { useDispatch, useSelector } from '../../services/store';
-import { getBun, getSelectedIngredients } from '../../services/constructor-slice';
-import { getOrderModalData, getOrderRequest, clearOrderModal } from '../../services/order-slice';
+import {
+  getBun,
+  getSelectedIngredients
+} from '../../services/constructor-slice';
+import {
+  getOrderModalData,
+  getOrderRequest,
+  clearOrderModal
+} from '../../services/order-slice';
 import { sendOrder } from '../../services/order-slice';
 import { getIsAuthorized } from '../../services/user-slice';
 import { useNavigate } from 'react-router-dom';

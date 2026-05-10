@@ -1,7 +1,7 @@
 describe('Конструктор бургера', () => {
   beforeEach(() => {
-    cy.intercept('GET', '**/api/ingredients', {
-      fixture: 'ingredients.json'
+    cy.intercept('GET', 'https://norma.education-services.ru/api/ingredients', {
+      body: { success: true, data: require('../fixtures/ingredients.json') }
     }).as('getIngredients');
     cy.visit('/');
     cy.wait('@getIngredients');
@@ -55,11 +55,11 @@ describe('Конструктор бургера', () => {
 
   describe('Создание заказа', () => {
     beforeEach(() => {
-      cy.intercept('GET', '**/api/auth/user', {
-        fixture: 'user.json'
+      cy.intercept('GET', 'https://norma.education-services.ru/api/auth/user', {
+        body: require('../fixtures/user.json')
       }).as('getUser');
-      cy.intercept('POST', '**/api/orders', {
-        fixture: 'order.json'
+      cy.intercept('POST', 'https://norma.education-services.ru/api/orders', {
+        body: require('../fixtures/order.json')
       }).as('createOrder');
 
       cy.window().then((win) => {

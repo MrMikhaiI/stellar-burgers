@@ -10,7 +10,7 @@ describe('Конструктор бургера', () => {
   describe('Добавление ингредиентов в конструктор', () => {
     it('должен добавлять булку в конструктор', () => {
       cy.contains('Краторная булка N-200i')
-        .closest('a')
+        .closest('li')
         .find('button')
         .click();
       cy.get('[data-cy="constructor-bun-top"]').should(
@@ -21,7 +21,7 @@ describe('Конструктор бургера', () => {
 
     it('должен добавлять начинку в конструктор', () => {
       cy.contains('Биокотлета из марсианской Магнолии')
-        .closest('a')
+        .closest('li')
         .find('button')
         .click();
       cy.get('[data-cy="constructor-ingredients"]').should(
@@ -77,15 +77,15 @@ describe('Конструктор бургера', () => {
 
     it('должен оформлять заказ и показывать номер заказа', () => {
       cy.contains('Краторная булка N-200i')
-        .closest('a')
+        .closest('li')
         .find('button')
         .click();
       cy.contains('Биокотлета из марсианской Магнолии')
-        .closest('a')
+        .closest('li')
         .find('button')
         .click();
 
-      cy.get('[data-cy="order-button"]').click();
+      cy.contains('button', 'Оформить заказ').click();
       cy.wait('@createOrder');
 
       cy.get('[data-cy="modal"]').should('be.visible');

@@ -26,14 +26,17 @@ describe('rootReducer', () => {
       },
       orderHistory: {
         orders: [],
-        total: null,
-        totalToday: null,
+        feed: {
+          total: 0,
+          totalToday: 0
+        },
         isLoading: false,
         error: null
       },
       user: {
-        isAuthChecked: false,
-        user: null,
+        isAuthorized: false,
+        data: null,
+        isLoading: false,
         error: null
       },
       userOrders: {

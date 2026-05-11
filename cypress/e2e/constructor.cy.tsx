@@ -1,8 +1,11 @@
 describe('Конструктор бургера', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'https://norma.education-services.ru/api/ingredients', {
+    cy.intercept('GET', '**/api/ingredients', {
       body: { success: true, data: require('../fixtures/ingredients.json') }
     }).as('getIngredients');
+    cy.intercept('GET', '**/api/auth/user', {
+      body: require('../fixtures/user.json')
+    }).as('getUser');
     cy.visit('/');
     cy.wait('@getIngredients');
   });
@@ -33,32 +36,28 @@ describe('Конструктор бургера', () => {
 
   describe('Модальное окно ингредиента', () => {
     it('должен открываться при клике на ингредиент', () => {
-      cy.contains('Краторная булка N-200i').click();
-      cy.get('[data-cy="modal"]').should('be.visible');
-      cy.get('[data-cy="modal"]').should('contain', 'Краторная булка N-200i');
+      cy.contains('Краторная булка N-200i').as('bun').click();
+      cy.get('[data-cy="modal"]').should('be.visible').and('contain', 'Краторная булка N-200i');
     });
 
     it('должен закрываться по клику на крестик', () => {
       cy.contains('Краторная булка N-200i').click();
-      cy.get('[data-cy="modal"]').should('be.visible');
+      cy.get('[data-cy="modal"]').as('modal').should('be.visible');
       cy.get('[data-cy="modal-close"]').click();
-      cy.get('[data-cy="modal"]').should('not.exist');
+      cy.get('@modal').should('not.exist');
     });
 
     it('должен закрываться по клику на оверлей', () => {
       cy.contains('Краторная булка N-200i').click();
-      cy.get('[data-cy="modal"]').should('be.visible');
+      cy.get('[data-cy="modal"]').as('modal').should('be.visible');
       cy.get('[data-cy="modal-overlay"]').click({ force: true });
-      cy.get('[data-cy="modal"]').should('not.exist');
+      cy.get('@modal').should('not.exist');
     });
   });
 
   describe('Создание заказа', () => {
     beforeEach(() => {
-      cy.intercept('GET', 'https://norma.education-services.ru/api/auth/user', {
-        body: require('../fixtures/user.json')
-      }).as('getUser');
-      cy.intercept('POST', 'https://norma.education-services.ru/api/orders', {
+      cy.intercept('POST', '**/api/orders', {
         body: require('../fixtures/order.json')
       }).as('createOrder');
 
@@ -66,6 +65,9 @@ describe('Конструктор бургера', () => {
         win.localStorage.setItem('refreshToken', 'test-refresh-token');
       });
       cy.setCookie('accessToken', 'test-access-token');
+
+      cy.visit('/');
+      cy.wait('@getIngredients');
     });
 
     afterEach(() => {
@@ -88,13 +90,12 @@ describe('Конструктор бургера', () => {
       cy.contains('button', 'Оформить заказ').click();
       cy.wait('@createOrder');
 
-      cy.get('[data-cy="modal"]').should('be.visible');
+      cy.get('[data-cy="modal"]').as('modal').should('be.visible');
       cy.get('[data-cy="order-number"]').should('contain', '12345');
 
       cy.get('[data-cy="modal-close"]').click();
-      cy.get('[data-cy="modal"]').should('not.exist');
+      cy.get('@modal').should('not.exist');
 
-      // После очистки конструктор возвращается в пустое состояние
       cy.contains('Выберите булки').should('be.visible');
       cy.get('[data-cy="constructor-ingredients"]').should(
         'contain',

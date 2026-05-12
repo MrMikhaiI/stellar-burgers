@@ -1,26 +1,21 @@
-import React from 'react';
+import { FC } from 'react';
+import { TOrderDetailsUIProps } from './type';
 import styles from './order-details.module.css';
-import doneImg from '../../../images/done.svg';
-import { OrderDetailsUIProps } from './type';
+import { CheckMarkIcon } from '@zlden/react-developer-burger-ui-components';
 
-export const OrderDetailsUI: React.FC<OrderDetailsUIProps> = ({
-  orderNumber
-}) => (
-  <>
-    <h2 className={`${styles.title} text text_type_digits-large mt-2 mb-4`}>
+export const OrderDetailsUI: FC<TOrderDetailsUIProps> = ({ orderNumber }) => (
+  <div className={styles.wrap}>
+    <p
+      className={`text text_type_digits-large ${styles.number}`}
+      data-cy='order-number'
+    >
       {orderNumber}
-    </h2>
-    <p className='text text_type_main-medium'>идентификатор заказа</p>
-    <img
-      className={styles.img}
-      src={doneImg}
-      alt='изображение статуса заказа.'
-    />
-    <p className='text text_type_main-default mb-1'>
-      Ваш заказ начали готовить
     </p>
-    <p className={`${styles.text} text text_type_main-default`}>
+    <p className='text text_type_main-medium mt-8 mb-15'>идентификатор заказа</p>
+    <CheckMarkIcon type='primary' />
+    <p className='text text_type_main-default mt-15 mb-2'>Ваш заказ начали готовить</p>
+    <p className='text text_type_main-default text_color_inactive'>
       Дождитесь готовности на орбитальной станции
     </p>
-  </>
+  </div>
 );

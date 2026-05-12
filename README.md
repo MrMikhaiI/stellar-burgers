@@ -10,6 +10,8 @@
 - **React Router v6** — роутинг и модальные окна через URL
 - **Webpack 5** — сборка
 - **CSS Modules** — стилизация
+- **Jest** — юнит-тестирование
+- **Cypress** — e2e-тестирование
 
 ## Функциональность
 
@@ -53,10 +55,44 @@ npm run start
 | Команда | Описание |
 |---|---|
 | `npm run start` | Запуск дев-сервера |
+| `npm test` | Запуск Jest тестов |
+| `npm run cypress:run` | Запуск Cypress тестов (headless) |
+| `npm run cypress:open` | Запуск Cypress в интерактивном режиме |
 | `npm run lint` | Проверка кода ESLint |
 | `npm run lint:fix` | Автоисправление ESLint |
 | `npm run format` | Форматирование кода Prettier |
 | `npm run storybook` | Запуск Storybook |
+
+## Тестирование
+
+### Jest (unit-тесты)
+
+```bash
+npm test
+```
+
+Покрытие:
+- `rootReducer` — проверка начального состояния хранилища
+- `constructorSlice` — добавление, удаление, перемещение ингредиентов
+- `ingredientsSlice` — pending / fulfilled / rejected
+- `orderSlice` — pending / fulfilled / rejected, очистка модалки
+
+### Cypress (e2e-тесты)
+
+> Перед запуском Cypress необходимо запустить дев-сервер (`npm run start`)
+
+```bash
+# headless режим
+npm run cypress:run
+
+# интерактивный режим
+npm run cypress:open
+```
+
+Покрытие:
+- Добавление булки и начинки в конструктор
+- Открытие / закрытие модального окна ингредиента
+- Полный цикл создания заказа с проверкой номера и очистки конструктора
 
 ## Маршруты
 

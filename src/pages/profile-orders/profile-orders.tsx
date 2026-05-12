@@ -23,5 +23,7 @@ export const ProfileOrders: FC = () => {
     });
   };
 
-  return <ProfileOrdersUI orders={orders} handleOrderClick={handleOrderClick} />;
+  return (
+    <ProfileOrdersUI orders={orders} handleOrderClick={handleOrderClick} />
+  );
 };
